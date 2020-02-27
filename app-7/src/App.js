@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class NewTask extends Component {
+  constructor(){
+    super()
+
+    this.state = {
+      input: ""
+    }
+
+    this.handleAdd = this.handleAdd.bind(this)
+  }
+  handleInputChange(value) {
+    this.setState({ input: value})
+  }
+  handleAdd(){
+    this.props.add(this.state.input)
+    this.setState({ input: ""})
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          value={this.state.input}
+          placeholder='Enter new task'
+          onChange={e => this.handleInputChange(e.target.value)}
+          />
+      </div>
+    )
+  }
 }
 
-export default App;
+export default NewTask;
